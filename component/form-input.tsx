@@ -1,10 +1,9 @@
-import { EnvelopeIcon } from "@heroicons/react/16/solid";
-
 interface FormInputProps {
   type: string;
   placeholder: string;
   required: boolean;
   name: string;
+  errors: string;
 }
 
 export default function FormInput({
@@ -12,6 +11,7 @@ export default function FormInput({
   placeholder,
   required,
   name,
+  errors,
 }: FormInputProps) {
   return (
     <>
@@ -22,6 +22,7 @@ export default function FormInput({
         required={required}
         name={name}
       />
+      <span className="text-red-500 font-medium">{errors}</span>
     </>
   );
 }
