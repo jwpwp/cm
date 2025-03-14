@@ -3,7 +3,7 @@ interface FormInputProps {
   placeholder: string;
   required: boolean;
   name: string;
-  errors: string;
+  errors?: string[];
 }
 
 export default function FormInput({
@@ -11,7 +11,7 @@ export default function FormInput({
   placeholder,
   required,
   name,
-  errors,
+  errors = [],
 }: FormInputProps) {
   return (
     <>
@@ -22,7 +22,11 @@ export default function FormInput({
         required={required}
         name={name}
       />
-      <span className="text-red-500 font-medium">{errors}</span>
+      {errors?.map((error, index) => (
+        <p key={index} className="text-red-500 font-medium">
+          {error}
+        </p>
+      ))}
     </>
   );
 }

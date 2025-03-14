@@ -6,8 +6,8 @@ import { handleForm } from "./action";
 import { useActionState } from "react";
 
 export default function Home() {
-  const [state, action] = useActionState(handleForm, " " as any);
-  console.log(state);
+  const [state, action] = useActionState(handleForm, null);
+
   return (
     <>
       <form
@@ -22,7 +22,7 @@ export default function Home() {
               type="email"
               placeholder="Email"
               required
-              errors={""}
+              errors={state?.fieldErrors.email}
             />
           </div>
           <div className="relative w-1/2">
@@ -32,7 +32,7 @@ export default function Home() {
               type="text"
               placeholder="Username"
               required
-              errors={""}
+              errors={state?.fieldErrors.username}
             />
           </div>
           <div className="relative w-1/2">
@@ -42,10 +42,17 @@ export default function Home() {
               type="password"
               placeholder="Password"
               required
-              errors={state}
+              errors={state?.fieldErrors.password}
             />
           </div>
           <FormButton text="Log in" />
+          {state === undefined ? (
+            <div className="bg-green-500 w-1/2 h-10 rounded-md px-10 py-2">
+              Welcome back!
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </form>
     </>
